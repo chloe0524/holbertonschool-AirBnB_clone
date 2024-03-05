@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """This module defines the 'BaseModel class'"""
-# rajouter infos dans docstring ici maybe; à voir
+
 import uuid
 from datetime import datetime
 from models import storage
+
 
 class BaseModel():
     """

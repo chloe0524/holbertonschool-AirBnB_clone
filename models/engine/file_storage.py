@@ -46,6 +46,7 @@ class FileStorage:
         Reloads the objects from the JSON file into the storage.
         """
         from models import base_model
+        from models import user
 
         module_mapping = {
             "BaseModel": base_model

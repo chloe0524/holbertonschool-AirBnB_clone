@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-
-"""Module defining the BaseModel class."""
 import uuid
 from datetime import datetime
 from models import storage
+
+"""Module defining the BaseModel class."""
 
 
 class BaseModel:
@@ -23,9 +23,9 @@ class BaseModel:
             for key, val in kwargs.items():
                 if key != '__class__':
                     setattr(self, key, val)
-                    if key in ['created_at', 'update_at']:
+                    if key in ['created_at', 'updated_at']:
                         val = datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f")
-                        setattr(self, key, val)
+                    setattr(self, key, val)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -44,7 +44,7 @@ class BaseModel:
 
     def to_dict(self):
         """Return a dictionary representation of the BaseModel instance."""
-        data = self.__dict__.copy()  # make a copy of the instance dictrionnary
+        data = self.__dict__.copy()  # make a copy of the instance dictionary
         data['__class__'] = self.__class__.__name__  # class name
         data['created_at'] = self.created_at.isoformat()  # conversion to ISO
         data['updated_at'] = self.updated_at.isoformat()  # converts to ISO

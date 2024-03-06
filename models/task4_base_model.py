@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """This module defines the 'BaseModel class'"""
-
+# rajouter infos dans docstring ici maybe; à voir
 import uuid
 from datetime import datetime
-from models import storage
+import copy
 
 
 class BaseModel():
@@ -32,15 +32,23 @@ class BaseModel():
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
-        storage.new(self)
-
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == "__class__":
-                    continue
-                if key in ["created_at", "updated_at"]:
-                    value = datetime.fromisoformat(value)
+        for key, value in kwargs.items():
+            if key != '__class__':
                 setattr(self, key, value)
+
+        # possibilité de ne mettre qu'une seule condition au lieu de deux ?
+        # à voir
+        if kwargs is not None:
+            if 'created_at' in kwargs:
+                kwargs['created_at'] = datetime.fromisoformat(
+                    kwargs['created_at']
+                )
+            # possibilité de mettre "%Y-%m-%dT%H:%M:%S.%f" au lieu
+            # de isoformat, à voir
+            if 'updated_at' in kwargs:
+                kwargs['updated_at'] = datetime.fromisoformat(
+                    kwargs['updated_at']
+                )
 
     def __str__(self):
         """Return a string representation 'BaseModel'"""
@@ -50,13 +58,12 @@ class BaseModel():
     def save(self):
         """Update the 'updated_at attribute' to the current 'datetime'"""
         self.updated_at = datetime.now()
-        storage.save()
 
     def to_dict(self):
         """Return a dictionary representation 'BaseModel'"""
-        new_dict = self.__dict__.copy()
-
-        new_dict["__class__"] = self.__class__.__name__
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-        return new_dict
+        # je sais pas si utiliser copy ou deepcopy, à voir
+        my_dict = copy.deepcopy(self.__dict__)
+        my_dict['__class__'] = type(self).__name__
+        my_dict['created_at'] = self.created_at.isoformat()
+        my_dict['updated_at'] = self.updated_at.isoformat()
+        return my_dict

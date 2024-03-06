@@ -33,10 +33,11 @@ class FileStorage():
 
     def reload(self):
         """Deserialize the 'JSON' file to '__objects'"""
+        from models.base_model import BaseModel
+
         try:
             with open(self.__file_path, 'r') as f:
                 objects = json.load(f)
-                from models.base_model import BaseModel
             for key, value in objects.items():
                 class_name = value.pop('__class__', None)
                 if class_name == 'BaseModel':

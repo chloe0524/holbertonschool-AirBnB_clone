@@ -25,7 +25,7 @@ class FileStorage():
 
         for key, value in FileStorage.__objects.items():
             jason_dico[key] = value.to_dict()
-        with open(self.__file_path, 'w') as f:
+        with open(FileStorage.__file_path, 'w') as f:
             json.dump(jason_dico, f)
 
     def reload(self):

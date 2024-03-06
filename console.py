@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not arg:
             print([str(storage.all()[id]) for id in storage.all()])
-            return 
+            return
 
         if arg not in globals():
             print("** class doesn't exist **")

@@ -2,13 +2,12 @@
 """This module defines the FileStorage class"""
 
 import json
-import os
 
 
 class FileStorage():
     """This class serializes and deserializes 'JSON' files"""
 
-    __file_path = os.path.join(os.getcwd(), 'file.json')
+    __file_path = 'file.json'
     __objects = dict()
 
     def all(self):

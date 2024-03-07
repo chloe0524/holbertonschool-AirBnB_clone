@@ -3,6 +3,7 @@
 
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """class with cmd methods"""
     prompt = '(hbnb) '
@@ -18,14 +19,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing when it's an empty line"""
         pass
-
-    # def create(self, arg):
-    #    """ 3 """
-    #    if not arg:
-    #        print ('** class name missing **')
-
-    #    if arg not in globals():
-    #        print("** class doesn't exist **")
 
 
 if __name__ == '__main__':

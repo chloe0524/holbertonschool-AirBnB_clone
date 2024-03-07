@@ -15,11 +15,6 @@ class TestBaseModel(unittest.TestCase):
         new_mod = BaseModel()
         new_mod.save()
         self.assertNotEqual(new_mod.created_at, new_mod.updated_at)
-
-    def test_save_helped(self):
-        """Test save(self)"""
-        new_mod = BaseModel()
-        new_mod.save()
         self.assertIsInstance(new_mod.updated_at, datetime.datetime)
 
     def test_created_at(self):

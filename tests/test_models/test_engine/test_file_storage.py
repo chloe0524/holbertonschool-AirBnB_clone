@@ -20,9 +20,9 @@ class TestFileStorage(unittest.TestCase):
     def test_new(self):
         """Test new()"""
         file_storage = FileStorage()
-        my_model = BaseModel()
-        file_storage.new(my_model)
-        self.assertIn("BaseModel." + my_model.id,
+        new_mod = BaseModel()
+        file_storage.new(new_mod)
+        self.assertIn("BaseModel." + new_mod.id,
                       file_storage._FileStorage__objects)
 
     def test_object(self):
@@ -40,21 +40,20 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test save()"""
         file_storage = FileStorage()
-        my_model = BaseModel()
-        file_storage.new(my_model)
+        new_mod = BaseModel()
+        file_storage.new(new_mod)
         file_storage.save()
         with open("file.json", "r") as f:
-            self.assertNotEqual(json.load(f),
-                                file_storage._FileStorage__objects)
+            self.assertIn("BaseModel." + new_mod.id, json.load(f))
 
     def test_reload(self):
         """Test reload()"""
         file_storage = FileStorage()
-        my_model = BaseModel()
-        file_storage.new(my_model)
+        new_mod = BaseModel()
+        file_storage.new(new_mod)
         file_storage.save()
         file_storage.reload()
-        self.assertIn("BaseModel." + my_model.id,
+        self.assertIn("BaseModel." + new_mod.id,
                       file_storage._FileStorage__objects)
 
 

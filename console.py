@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module creating the console"""
+"""module creating the console for project"""
 
 import cmd
 

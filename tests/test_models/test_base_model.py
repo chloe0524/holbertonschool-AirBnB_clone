@@ -26,10 +26,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base_model.id, str)
 
     def test_save(self):
-        """Test updated_at"""
-        new_mod = BaseModel()
-        new_mod.save()
-        self.assertNotEqual(new_mod.created_at, new_mod.updated_at)
+        """Test save()"""
+        my_model = BaseModel()
+        my_model.save()
+        self.assertNotEqual(my_model.created_at, my_model.updated_at)
+        self.assertIsInstance(my_model.updated_at, datetime.datetime)
 
     def test_to_dict(self):
         """Test to_dict """

@@ -10,6 +10,18 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """'unittests' for BaseModel class"""
 
+    def test_save(self):
+        """Test save()"""
+        new_mod = BaseModel()
+        new_mod.save()
+        self.assertNotEqual(new_mod.created_at, new_mod.updated_at)
+
+    def test_save_helped(self):
+        """Test save(self)"""
+        new_mod = BaseModel()
+        new_mod.save()
+        self.assertIsInstance(new_mod.updated_at, datetime.datetime)
+
     def test_created_at(self):
         """Test created_at"""
         base_model = BaseModel()
@@ -24,18 +36,6 @@ class TestBaseModel(unittest.TestCase):
         """Test id"""
         base_model = BaseModel()
         self.assertIsInstance(base_model.id, str)
-
-    def test_save(self):
-        """Test save()"""
-        my_model = BaseModel()
-        my_model.save()
-        self.assertNotEqual(my_model.created_at, my_model.updated_at)
-
-    def test_save_helped(self):
-        """Test save(self)"""
-        my_model = BaseModel()
-        my_model.save()
-        self.assertIsInstance(my_model.updated_at, datetime.datetime)
 
     def test_to_dict(self):
         """Test to_dict """

@@ -53,8 +53,13 @@ class TestFileStorage(unittest.TestCase):
         file_storage.new(new_mod)
         file_storage.save()
         file_storage.reload()
-        self.assertIn("BaseModel." + new_mod.id,
-                      file_storage._FileStorage__objects)
+        objects = file_storage.all()
+
+        self.assertIn("BaseModel." + new_mod.id, objects)
+        reloaded_mod = objects["BaseModel." + new_mod.id]
+
+        self.assertIsInstance(reloaded_mod, BaseModel)
+        self.assertEqual(reloaded_mod.id, new_mod.id)
 
 
 if __name__ == "__main__":

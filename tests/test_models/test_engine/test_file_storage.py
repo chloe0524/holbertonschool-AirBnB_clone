@@ -47,19 +47,21 @@ class TestFileStorage(unittest.TestCase):
             self.assertIn("BaseModel." + new_mod.id, json.load(f))
 
     def test_reload(self):
-        """Test reload()"""
+        """Test the reload of FileStorage class"""
         file_storage = FileStorage()
         new_mod = BaseModel()
+
         file_storage.new(new_mod)
         file_storage.save()
         file_storage.reload()
-        objects = file_storage.all()
 
-        self.assertIn("BaseModel." + new_mod.id, objects)
-        reloaded_mod = objects["BaseModel." + new_mod.id]
+        with open("file.json", 'r') as file:
+            self.assertIn("BaseModel." + new_mod.id, json.load(file))
 
-        self.assertIsInstance(reloaded_mod, BaseModel)
-        self.assertEqual(reloaded_mod.id, new_mod.id)
+        file_storage.save()
+        file_storage._FileStorage__objects = {}
+        file_storage.reload()
+        self.assertNotEqual(file_storage.all(), {})
 
 
 if __name__ == "__main__":

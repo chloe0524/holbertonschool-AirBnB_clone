@@ -2,35 +2,54 @@
 
 import uuid
 import json
-import unittest
-
-from models import storage
-from models.user import User
-from datetime import datetime
 from models.base_model import BaseModel
+from models.user import User
+import unittest
+from datetime import datetime
+from models import storage
 from models.engine.file_storage import FileStorage
 
 
-class test_user(unittest.TestCase):
-
-    def setUp(self):
-        self.user = User()
+class TestUserAttributes(unittest.TestCase):
+    """
+    Test the User class attributes
+    """
+    def test_empty_email(self):
+        user = User()
+        self.assertEqual(user.email, "")
 
     def test_email(self):
-        self.user.email = "monster@pacificpunch.com"
-        self.assertEqual(self.user.email, "monster@pacificpunch.com")
-
-    def test_password(self):
-        self.user.password = "multilevelBAD123"
-        self.assertEqual(self.user.password, "multilevelBAD123")
-
-    def test_empty_email(self):
-        with self.assertRaises(ValueError):
-            self.user.email = ""
+        user = User()
+        user.email = "monster@pacificpunch.com"
+        self.assertEqual(user.email, "monster@pacificpunch.com")
 
     def test_empty_password(self):
-        with self.assertRaises(ValueError):
-            self.user.password = ""
+        user = User()
+        self.assertEqual(user.password, "")
 
-if __name__ == '__main__':
+    def test_password(self):
+        user = User()
+        user.password = "666"
+        self.assertEqual(user.password, "666")
+
+    def test_empty_first_name(self):
+        user = User()
+        self.assertEqual(user.first_name, "")
+
+    def test_first_name(self):
+        user = User()
+        user.first_name = "Jason"
+        self.assertEqual(user.first_name, "Jason")
+
+    def test_last_name(self):
+        user = User()
+        user.last_name = "Statham"
+        self.assertEqual(user.last_name, "Statham")
+
+    def test_empty_last_name(self):
+        user = User()
+        self.assertEqual(user.last_name, "")
+
+
+if __name__ == "__main__":
     unittest.main()

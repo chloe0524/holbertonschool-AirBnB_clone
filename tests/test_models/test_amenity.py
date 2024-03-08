@@ -1,40 +1,26 @@
 #!/usr/bin/python3
-
+"""
+Module for Amenity unittest
+"""
 import uuid
 import json
-import unittest
-
-from models import storage
-from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.amenity import Amenity
+import unittest
+from datetime import datetime
+from models import storage
 from models.engine.file_storage import FileStorage
 
 
-class tests_amenity(unittest.TestCase):
-
-    def test_to_dict(self):
+class TestFileStorage(unittest.TestCase):
+    """
+    Test the State_id class attr
+    """
+    def test_user_amenity(self):
         amenity = Amenity()
-        amenity_dict = amenity.to_dict()
+        self.assertEqual(amenity.name, "")
 
-        self.assertIsInstance(amenity_dict, dict)
-        self.assertEqual(amenity_dict["__class__"], "Amenity")
-        self.assertEqual(amenity_dict["id"], amenity.id)
-        self.assertEqual(amenity_dict["created_at"],
-                         amenity.created_at.isoformat())
-        self.assertEqual(amenity_dict["updated_at"],
-                         amenity.updated_at.isoformat())
-        self.assertEqual(amenity_dict["name"], amenity.name)
-
-    def test_name(self):
-        """Test name attribute"""
+    def test_user_city_1(self):
         amenity = Amenity()
-        amenity.name = "Rainbow"
-
-        self.assertEqual(amenity.name, "Rainbow")
-
-    def test_id(self):
-        """Test if id attribute"""
-        amenity = Amenity()
-        amenity.id = "1234"
-
-        self.assertEqual(amenity.id, "1234")
+        amenity.name = "France"
+        self.assertEqual(amenity.name, "France")

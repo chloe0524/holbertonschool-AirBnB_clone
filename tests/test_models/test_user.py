@@ -6,11 +6,15 @@ import unittest
 
 from models import storage
 from models.user import User
+from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class TestUser(unittest.TestCase):
+class test_user(unittest.TestCase):
+
+    def setUp(self):
+        self.user = User()
 
     def test_email(self):
         self.user.email = "monster@pacificpunch.com"
@@ -27,7 +31,6 @@ class TestUser(unittest.TestCase):
     def test_empty_password(self):
         with self.assertRaises(ValueError):
             self.user.password = ""
-
 
 if __name__ == '__main__':
     unittest.main()

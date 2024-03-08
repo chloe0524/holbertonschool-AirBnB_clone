@@ -14,6 +14,11 @@ import cmd
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 storage = FileStorage()
 
@@ -50,12 +55,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        classe = globals()[arg]
-        add_instance = classe()
+        class_mapping = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Place": Place,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Review": Review
+        }
 
-        storage.save()
-
-        print(add_instance.id)
+        class_instance = class_mapping[arg]()
+        class_instance.save()
+        print(class_instance.id)
 
     def do_show(self, arg):
         """

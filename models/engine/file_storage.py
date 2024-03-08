@@ -45,11 +45,16 @@ class FileStorage:
         """
         Reloads the objects from the JSON file into the storage.
         """
-        from models import base_model, user
+        from models import base_model, user, place, state, city, amenity, review
 
         module_mapping = {
             "BaseModel": base_model,
-            "User": user
+            "User": user,
+            "Place": place,
+            "State": state,
+            "City": city,
+            "Amenity": amenity,
+            "Review": review
         }
 
         if os.path.exists(self.__file_path):

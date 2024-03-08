@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Module for Review unittest
-"""
+"""unittest for Review class"""
 import uuid
 import json
 from models.base_model import BaseModel

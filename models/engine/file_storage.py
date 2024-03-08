@@ -10,8 +10,9 @@ class FileStorage:
     This class represents a file storage
     system for storing objects in JSON format.
     """
-
+    # File path for storing JSON data
     __file_path = "file.json"
+    # Dictionary to hold objects
     __objects = {}
 
     def all(self):
@@ -27,6 +28,7 @@ class FileStorage:
         Args:
         obj: The object to be added.
         """
+        # Generate a unique key for the object and add it to the dictionary
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
@@ -35,9 +37,11 @@ class FileStorage:
         Saves the objects in the storage to a JSON file.
         """
         data = {}
+        # Convert objects to dictionary format
         for key, obj in self.__objects.items():
             data[key] = obj.to_dict()
 
+        # Write data to the JSON file
         with open(FileStorage.__file_path, 'w') as file:
             json.dump(data, file)
 
@@ -55,6 +59,7 @@ class FileStorage:
             review
         )
 
+        # Mapping of class names to corresponding modules
         module_mapping = {
             "BaseModel": base_model,
             "User": user,
@@ -66,8 +71,10 @@ class FileStorage:
         }
 
         if os.path.exists(self.__file_path):
+            # Read data from the JSON file
             with open(self.__file_path, "r", encoding="utf-8") as file:
                 data = json.load(file)
+                # Iterate through the data and create object instances
                 for key, value in data.items():
                     class_name = value["__class__"]
 

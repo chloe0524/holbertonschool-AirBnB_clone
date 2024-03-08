@@ -1,28 +1,33 @@
 #!/usr/bin/python3
 
-import uuid
-import json
-import unittest
+"""Unittests for City class"""
 
-from models import storage
+import unittest
+from datetime import datetime
 from models.city import City
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
+from models import storage
 
 
 class TestCity(unittest.TestCase):
 
-    def test_name(self):
+    def test_city_instance_base_model(self):
         city = City()
-        city.name = (
-            "Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch"
-        )
-        self.assertEqual(
-            city.name,
-            "Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch"
-        )
+        self.assertIsInstance(city, BaseModel)
 
-    def test_state_id(self):
+    def test_city(self):
         city = City()
-        city.state_id = "1234"
-        self.assertEqual(city.state_id, "1234")
+        self.assertEqual(city.state_id, "")
+        self.assertEqual(city.name, "")
+
+    def test_city_attr(self):
+        city = City()
+        city.state_id = "666"
+        city.name = "Hell"
+
+        self.assertEqual(city.state_id, "666")
+        self.assertEqual(city.name, "Hell")
+
+
+if __name__ == "__main__":
+    unittest.main()

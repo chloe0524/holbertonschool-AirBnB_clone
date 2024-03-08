@@ -10,6 +10,16 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """'unittests' for BaseModel class"""
 
+    def test_save(self):
+        """Test save()"""
+        base_model = BaseModel()
+        base_model.name = "new_model"
+        base_model.save()
+        self.assertNotEqual(base_model.created_at, base_model.updated_at)
+
+        with open("file.json", "r", encoding="utf-8") as file:
+            self.assertIn(base_model.name, file.read())
+
     def test_created_at(self):
         """Test created_at"""
         base_model = BaseModel()
@@ -25,12 +35,6 @@ class TestBaseModel(unittest.TestCase):
         base_model = BaseModel()
         self.assertIsInstance(base_model.id, str)
 
-    def test_save(self):
-        """Test updated_at"""
-        new_mod = BaseModel()
-        new_mod.save()
-        self.assertNotEqual(new_mod.created_at, new_mod.updated_at)
-
     def test_to_dict(self):
         """Test to_dict """
         new_mod = BaseModel()
@@ -45,6 +49,14 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(new_mod),
                          "[BaseModel] ({}) {}".format
                          (new_mod.id, new_mod.__dict__))
+
+    def test_init(self):
+        """Test __init__()"""
+        new_mod = BaseModel()
+        self.assertIsInstance(new_mod, BaseModel)
+        self.assertIsInstance(new_mod.id, str)
+        self.assertIsInstance(new_mod.created_at, datetime.datetime)
+        self.assertIsInstance(new_mod.updated_at, datetime.datetime)
 
 
 if __name__ == "__main__":

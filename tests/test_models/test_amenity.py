@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" unittests for amenity class """
 
 import uuid
 import json
@@ -6,22 +7,19 @@ import unittest
 
 from models import storage
 from models.amenity import Amenity
+from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
 class tests_amenity(unittest.TestCase):
+    """ Test amenity class"""
 
-    def test_name(self):
-        """Test name attribute"""
+    def test_user_amenity(self):
         amenity = Amenity()
-        amenity.name = "Rainbow"
+        self.assertEqual(amenity.name, "")
 
-        self.assertEqual(amenity.name, "Rainbow")
-
-    def test_id(self):
-        """Test if id attribute"""
+    def test_user_city_1(self):
         amenity = Amenity()
-        amenity.id = "1234"
-
-        self.assertEqual(amenity.id, "1234")
+        amenity.name = "France"
+        self.assertEqual(amenity.name, "France")

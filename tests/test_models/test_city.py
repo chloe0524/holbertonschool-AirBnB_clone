@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Module for City unittest
-"""
+"""unittests for City class"""
 import uuid
 import json
 from models.base_model import BaseModel

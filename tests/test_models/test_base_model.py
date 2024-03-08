@@ -50,10 +50,10 @@ class TestBaseModel(unittest.TestCase):
     def test_init(self):
         """Test __init__()"""
         new_mod = BaseModel()
-        self.assertIsInstance(my_model, BaseModel)
-        self.assertIsInstance(my_model.id, str)
-        self.assertIsInstance(my_model.created_at, datetime.datetime)
-        self.assertIsInstance(my_model.updated_at, datetime.datetime)
+        self.assertIsInstance(new_model, BaseModel)
+        self.assertIsInstance(new_model.id, str)
+        self.assertIsInstance(new_model.created_at, datetime.datetime)
+        self.assertIsInstance(new_model.updated_at, datetime.datetime)
 
 
 if __name__ == "__main__":

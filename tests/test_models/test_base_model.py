@@ -12,10 +12,13 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """Test save()"""
-        new_mod = BaseModel()
-        new_mod.save()
-        self.assertNotEqual(new_mod.created_at, new_mod.updated_at)
-        self.assertIsInstance(new_mod.updated_at, datetime.datetime)
+        base_model = BaseModel()
+        base_model.name = "new_model"
+        base_model.save()
+        self.assertNotEqual(base_model.created_at, base_model.updated_at)
+
+        with open("file.json", "r", encoding="utf-8") as file:
+            self.assertIn(base_model.name, file.read())
 
     def test_created_at(self):
         """Test created_at"""

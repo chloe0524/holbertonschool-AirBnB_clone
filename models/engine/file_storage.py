@@ -45,7 +45,15 @@ class FileStorage:
         """
         Reloads the objects from the JSON file into the storage.
         """
-        from models import base_model, user, place, state, city, amenity, review
+        from models import (
+            base_model,
+            user,
+            place,
+            state,
+            city,
+            amenity,
+            review
+        )
 
         module_mapping = {
             "BaseModel": base_model,
@@ -69,4 +77,5 @@ class FileStorage:
                         obj_instance = model_class(**value)
                         self.__objects[key] = obj_instance
                     else:
-                        print(f"Warning: Class {class_name} not found in module mapping.")
+                        print("Warning: Class " + class_name +
+                              " not found in module mapping.")

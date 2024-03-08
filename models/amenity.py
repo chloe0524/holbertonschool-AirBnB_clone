@@ -4,6 +4,7 @@
 
 from models.base_model import BaseModel
 
+
 class Amenity(BaseModel):
     """
     Represents a type of facility or feature that a place may have.

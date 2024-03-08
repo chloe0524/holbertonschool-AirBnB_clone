@@ -4,6 +4,7 @@
 
 from models.base_model import BaseModel
 
+
 class City(BaseModel):
     """
     Represents a city within a specific state.

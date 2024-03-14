@@ -6,15 +6,15 @@ header
     background-color: white;
     height: 70px;
     width: 100%;
-    border-bottom: 1px #CCCCCC;
-    .container
-    {
-        display: flex;
-        align-items: center;
-    }
+    border-bottom: 1px solid #CCCCCC;
+}
+.container
+{
+    display: flex;
+    align-items: center;
+}
     
-    .logo_hbnb
-    {
-        margin-left: 20px;
-    }
+.logo_hbnb
+{
+    margin-left: 20px;
 }
